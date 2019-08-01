@@ -4,7 +4,7 @@
     {% for post in posts %}
         <div class="post">
             <h1><a href="">{{ post.title }}</a></h1>
-            <p>{{ post.text|linebreaksbr }}</p>
+            <p class="text-justify">{{ post.text | linebreaksbr }}</p>
             <div class="date">
                 <p>published: {{ post.published_date }}</p>
             </div>
@@ -12,16 +12,16 @@
     {% endfor %}
 
     <script>
-        let Post = {
-            title: [],
-            text: [],
-            published_date: []
-        }
+        let Post = []
 
         {% for post in posts %}
-            Post.title = "{{post.title}}"
-            Post.text = "{{post.text}}"
-            Post.published_date = "{{post.published_date}}"
+            Post.push({
+                pk: {{ post.pk }},
+                title: "{{ post.title }}",
+                text: "{{ post.text }}",
+                created_date: "{{ post.created_date }}",
+                published_date: "{{ post.published_date }}"
+            })
         {% endfor %}
 
         console.log(Post)
