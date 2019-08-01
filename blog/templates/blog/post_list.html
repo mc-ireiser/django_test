@@ -1,50 +1,29 @@
-{% load static %}
-<html>
-    <head>
-        <title>Django blog</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-    </head>
-    <body>
-        <div class="page-header">
-            <h1>
-                <a href="/">Django Blog</a>
-            </h1>
-            <br>
-        </div>
+{% extends 'blog/base.html' %}
 
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                    {% for post in posts %}
-                        <div class="post">
-                            <h1><a href="">{{ post.title }}</a></h1>
-                            <p>{{ post.text|linebreaksbr }}</p>
-                            <div class="date">
-                                <p>published: {{ post.published_date }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <h1><a href="">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+            <div class="date">
+                <p>published: {{ post.published_date }}</p>
             </div>
         </div>
+    {% endfor %}
 
-        <script>
-            let Post = {
-                title: [],
-                text: [],
-                published_date: []
-            }
+    <script>
+        let Post = {
+            title: [],
+            text: [],
+            published_date: []
+        }
 
-            {% for post in posts %}
-                Post.title = "{{post.title}}"
-                Post.text = "{{post.text}}"
-                Post.published_date = "{{post.published_date}}"
-            {% endfor %}
+        {% for post in posts %}
+            Post.title = "{{post.title}}"
+            Post.text = "{{post.text}}"
+            Post.published_date = "{{post.published_date}}"
+        {% endfor %}
 
-            console.log(Post)
-        </script>
-    </body>
-</html>
+        console.log(Post)
+    </script>
+{% endblock %}
